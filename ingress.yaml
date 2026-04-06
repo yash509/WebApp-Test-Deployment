@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hoobank-webapp-ingress
+spec:
+  rules:
+  - host: hoobank-webapp
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hoobank-webapp-service
+            port:
+              number: 3000 #80
+      - path: /app
+        pathType: Prefix
+        backend:
+          service:
+            name: hoobank-webapp-service
+            port:
+              number: 3000 #80

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hoobank-webapp-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hoobank-webapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: hoobank-webapp
+        version: green
+    spec:
+      containers:
+      - name: hoobank-webapp
+        image: yash5090/hoobank-webapp:green # Adjust the image tag for the green version
+        ports:
+        - containerPort: 3000
+        # env:
+        # - name: SPRING_DATASOURCE_URL
+        #   value: jdbc:mysql://mysql-service:3306/hoobank-webappdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+        # - name: SPRING_DATASOURCE_USERNAME
+        #   value: root
+        # - name: SPRING_DATASOURCE_PASSWORD
+        #   value: Test@123
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "500m"
+          limits:
+            memory: "1000Mi"
+            cpu: "1000m"
